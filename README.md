@@ -1,3 +1,7 @@
+# Expense Tracker App with React and Tailwind
+This app is just a study case for me to implement React and tailwind.
+This app use local storage to save income and expese.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
