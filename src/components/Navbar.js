@@ -10,9 +10,9 @@ class Navbar extends Component {
     handleClick = e => {
         let element = e.target.parentElement.childNodes;
         for (var el of element){
-            el.classList.remove("active");
+            el.classList.remove(`bg-${this.props.theme}-500`);
         }
-        e.target.classList.add("active");
+          e.target.classList.add(`bg-${this.props.theme}-500`);
 
         this.props.handleMenu(e.target.innerHTML);
 
@@ -23,8 +23,8 @@ class Navbar extends Component {
   render() {
     return (
       <div className="w-full flex justify-center row-span-1">
-        <div className="rounded-xl bg-gray-800 text-xs text-gray-400 flex justify-center mt-4">
-          <button onClick={this.handleClick} className="p-2 px-4 font-bold rounded-xl active">All</button>
+        <div className={`rounded-xl bg-gray-800 text-xs text-white flex justify-center mt-4`}>
+          <button onClick={this.handleClick} className={`p-2 px-4 font-bold rounded-xl bg-${this.props.theme}-500`}>All</button>
           <button onClick={this.handleClick} className="p-2 px-4 font-bold rounded-xl">Income</button>
           <button onClick={this.handleClick} className="p-2 px-4 font-bold rounded-xl">Expense</button>
         </div>

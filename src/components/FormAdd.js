@@ -37,11 +37,12 @@ class FormAdd extends Component{
 
         if(data.title && data.value && data.date && data.type){
             this.props.addData(this.state);
+            this.props.history.push('/');
         }else{
-            console.log("err");
+            alert("Please insert all input!");
         }
 
-        this.props.history.push('/');
+        
     }
     render(){
         return(
@@ -54,7 +55,7 @@ class FormAdd extends Component{
                             </svg>
                         </Link>
                         <h1 className="text-gray-500 text-sm">Add</h1>
-                        <button className="p-1 px-3 rounded-xl text-xs bg-yellow-500">Save</button>
+                        <button className={`p-1 px-3 rounded-xl text-xs bg-${this.props.theme}-500`}>Save</button>
                     </div>
 
                     <div className="w-full mb-2">

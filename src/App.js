@@ -4,51 +4,31 @@ import TotalExpense from "./components/TotalExpense";
 import Navbar from "./components/Navbar";
 import ExpenseList from "./components/ExpenseList";
 import BtnAdd from "./components/BtnAdd";
-import FormAdd from './components/FormAdd';
+import BtnSetting from './components/BtnSetting';
+import FormAdd from "./components/FormAdd";
+import FormSetting from './components/FormSetting';
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 
 class App extends Component {
   state = {
-    expense: [
-      {
-        id: 1,
-        title: "Payment freelance",
-        type: "Income",
-        value: 400,
-        date: "2/5/2021",
-      },
-      {
-        id: 2,
-        title: "buy milk",
-        type: "Expense",
-        value: 200,
-        date: "7/12/2018",
-      },
-    ],
+    expense: [],
     menu: "All",
+    curency: "IDR",
+    theme: "yellow"
   };
 
-  updateLocal = (data) => {
-    localStorage.setItem('expense', JSON.stringify(data));
+  setDefaultLocal = () =>{
+    localStorage.setItem("curency", "USD");
+    localStorage.setItem("theme", "yellow");
+    localStorage.setItem("expense", JSON.stringify([]))
+    
   }
-
-  // handleTotal = () => {
-  //   this.setState({
-  //     total: 0
-  //   });
-
-  //   const total =  this.state.expense.reduce( (prev, cur) => {
-  //     if(cur.type === "Expense"){
-  //       return prev - cur.value
-  //     }else{
-  //       return prev + cur.value
-  //     }
-  //   },0);
-
-  //   this.setState({
-  //     total
-  //   });
-  // }
+  updateLocal = (data) => {
+    localStorage.clear();
+    localStorage.setItem("expense", JSON.stringify(data));
+    localStorage.setItem("curency", this.state.curency);
+    localStorage.setItem("theme", this.state.theme);
+  };
 
   handleMenu = (menu) => {
     this.setState({
@@ -56,67 +36,99 @@ class App extends Component {
     });
   };
 
+  handleSetting = (data) => {
+    this.setState({
+      expense: data.expense,
+      curency: data.curency,
+      theme: data.theme
+    });
+
+    localStorage.setItem("expense", JSON.stringify(data.expense));
+    localStorage.setItem("curency", data.curency);
+    localStorage.setItem("theme", data.theme);
+  }
+
   addData = (data) => {
     data.id = Math.random();
     data.value = parseInt(data.value);
     this.setState({
-      expense: [...this.state.expense, data]
+      expense: [...this.state.expense, data],
     });
 
     this.updateLocal([...this.state.expense, data]);
-  }
-  
-  deleteData = data => {
-    let newData = this.state.expense.filter( exp => exp.id !== data.id);
+  };
+
+  deleteData = (data) => {
+    let newData = this.state.expense.filter(exp => exp.id !== data.id);
 
     this.setState({
-      expense: newData
+      expense: newData,
     });
 
-    this.updateLocal([...this.state.expense]);
+    this.updateLocal([...newData]);
+  };
 
-  }
-
-  componentDidMount(){
+  componentDidMount() {
     const json = localStorage.getItem("expense");
     const expense = JSON.parse(json) || [];
-    this.setState({
-      expense
-    })
+    const curency = localStorage.getItem("curency");
+    const theme = localStorage.getItem("theme");
+
+    // if(!curency && !theme){
+    //   this.setDefaultLocal();
+      
+    // }
+    this.setState({expense, curency, theme});    
+    
   }
 
-
   render() {
+    const curency = localStorage.getItem("curency");
+    const theme = localStorage.getItem("theme");
+
+    if(!curency && !theme){
+      this.setDefaultLocal();
+      
+    }
+    
     return (
       <div className="App w-full flex justify-center">
-        <div className="w-screen h-screen grid bg-gray-800 grid-rows-5">
+        <div className="w-screen h-screen grid bg-gray-800 grid-rows-5 relative">
           {/* top section */}
-          <TotalExpense expense={this.state.expense}/>
+
+          
+          <TotalExpense expense={this.state.expense} curency={this.state.curency} theme={this.state.theme} />
 
           {/* bottom section */}
 
           <BrowserRouter>
-          <div className="relative bg-gray-900 row-span-3 text-white rounded-t-3xl shadow-2xl pt-10 px-4 grid grid-rows-6">
-            <Switch>
-              <Route exact path="/">
-                {/* menu section */}
-                <Navbar handleMenu={this.handleMenu} />
+            <div className="relative bg-gray-900 row-span-3 text-white rounded-t-3xl shadow-2xl pt-10 px-4 grid grid-rows-6">
+              <Switch>
+                <Route exact path="/">
+                  <BtnSetting />
 
-                {/* expense section */}
-                <ExpenseList
-                  expense={this.state.expense}
-                  menu={this.state.menu}
-                  deleteData={this.deleteData}
-                />
+                  {/* menu section */}
+                  <Navbar handleMenu={this.handleMenu} theme={this.state.theme} />
 
-                <BtnAdd />
-              </Route>
+                  {/* expense section */}
+                  <ExpenseList
+                    expense={this.state.expense}
+                    menu={this.state.menu}
+                    deleteData={this.deleteData}
+                    curency={this.state.curency}
+                  />
 
-              <Route path="/add">
-                <FormAdd addData={this.addData} />
-              </Route>
-            </Switch>
+                  <BtnAdd theme={this.state.theme} />
+                </Route>
 
+                <Route path="/add">
+                  <FormAdd addData={this.addData} theme={this.state.theme} />
+                </Route>
+                <Route path='/setting'>
+                  <FormSetting handleSetting={this.handleSetting} expense={this.state.expense} theme={this.state.theme} />
+                </Route>
+                
+              </Switch>
             </div>
           </BrowserRouter>
         </div>

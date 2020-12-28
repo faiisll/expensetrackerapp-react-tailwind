@@ -1,11 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-const BtnAdd = () => {
+const BtnAdd = ({theme}) => {
     return(
         <div className="absolute bottom-0 w-full text-center">
             <Link to="/add">
-              <button className="p-1 px-8 bg-yellow-500 shadow-lg rounded-t-xl">
+              <button className={`p-1 px-8 bg-${theme}-500 shadow-lg rounded-t-xl`}>
                 
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

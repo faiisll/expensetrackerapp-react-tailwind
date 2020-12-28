@@ -756,7 +756,7 @@ module.exports = {
     boxSizing: ['responsive'],
     clear: ['responsive'],
     container: ['responsive'],
-    cursor: ['responsive'],
+    cursor: ['responsive', 'hover'],
     display: ['responsive'],
     divideColor: ['responsive', 'dark'],
     divideOpacity: ['responsive'],
