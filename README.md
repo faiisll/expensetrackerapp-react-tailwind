@@ -1,3 +1,9 @@
+# Expense Tracker App with React and Tailwind
+This app is just a study case for me to implement React and React router.\
+This app use local storage to save income and expese.\
+note : ui isue in form add item, cant hide the radio botton.\
+vercel link : https://expensetrackerapp-react-tailwind.vercel.app/
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
