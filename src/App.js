@@ -110,6 +110,8 @@ class App extends Component {
                   {/* menu section */}
                   <Navbar handleMenu={this.handleMenu} theme={this.state.theme} />
 
+                  <BtnAdd theme={this.state.theme} />
+
                   {/* expense section */}
                   <ExpenseList
                     expense={this.state.expense}
@@ -118,7 +120,7 @@ class App extends Component {
                     curency={this.state.curency}
                   />
 
-                  <BtnAdd theme={this.state.theme} />
+                  
                 </Route>
 
                 <Route path="/add">

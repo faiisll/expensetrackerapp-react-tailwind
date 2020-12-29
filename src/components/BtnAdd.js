@@ -3,9 +3,9 @@ import {Link} from 'react-router-dom';
 
 const BtnAdd = ({theme}) => {
     return(
-        <div className="absolute bottom-0 w-full text-center">
+        <div className="absolute bottom-5 z-50 w-full text-center">
             <Link to="/add">
-              <button className={`p-1 px-8 bg-${theme}-500 shadow-lg rounded-t-xl`}>
+              <button className={`p-2 bg-${theme}-500 shadow-xl rounded-full`}>
                 
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

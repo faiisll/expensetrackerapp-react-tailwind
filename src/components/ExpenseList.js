@@ -55,7 +55,7 @@ const ExpenseList = ({expense, menu, deleteData}) => {
 
 
   return (
-    <div className="flex flex-col mt-2 row-span-5 overflow-y-auto scrollbar-thin scrollbar-thumb-white mt-3">
+    <div className="flex flex-col mt-2 row-span-4 overflow-y-auto scrollbar-thin scrollbar-thumb-white mt-3">
       {/* expense item */}
       {jsx}
     </div>
