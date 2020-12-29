@@ -5,6 +5,10 @@ const ExpenseList = ({expense, menu, deleteData}) => {
     let color = "red";
     let symbol = "-";
 
+    let numberWithCommas = (x) => {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
     let data = expense.filter( exp => {
         if(menu === "All"){
             return exp;
@@ -48,7 +52,7 @@ const ExpenseList = ({expense, menu, deleteData}) => {
             </div>
           </div>
 
-          <h1 className={`text-${color}-300 font-semibold`}>{symbol} {d.value}</h1>
+          <h1 className={`text-${color}-300 font-semibold`}>{symbol} {numberWithCommas(d.value)}</h1>
         </div>
         )
     });

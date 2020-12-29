@@ -6,6 +6,10 @@ class TotalExpense extends Component {
     font_size : "text-6xl"
   }
 
+  numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
   render() {
     return (
       <div className="bg-gray-800 row-span-2 my-auto">
@@ -16,13 +20,15 @@ class TotalExpense extends Component {
               {this.props.curency}{" "}
             </h1>
             <h1 className="md:text-6xl text-5xl">
-              {this.props.expense.reduce((prev, cur) => {
+              {this.numberWithCommas(
+                this.props.expense.reduce((prev, cur) => {
                 if (cur.type === "Expense") {
                   return prev - cur.value;
                 } else {
                   return prev + cur.value;
                 }
-              }, 0)}
+              }, 0)
+              ) }
             </h1>
           </div>
         </div>
