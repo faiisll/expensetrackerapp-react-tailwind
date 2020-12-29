@@ -56,7 +56,7 @@ class FormSetting extends Component {
             <div className="w-full mb-4">
                 <label htmlFor="curency" className="text-sm text-gray-400">curency</label>
                 <select name="curency" id="" className="w-full px-3 py-2 rounded bg-gray-800 focus:bg-gray-700 mt-2" onChange={this.handleInput}>
-                   <option value="0">Select Curency</option> 
+                   
                     <option value="USD">USD</option>
                     <option value="IDR">IDR</option>
                     <option value="EUR">EUR</option>
